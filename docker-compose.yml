@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "3838:3838"
+    volumes:
+      - ./:/srv/app
+    environment:
+      - PORT=3838
+    depends_on:
+      - api
+  api:
+    image: r-ecommerce-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/srv/app
